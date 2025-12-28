@@ -12,7 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    /* Use app base size to avoid scaling everything */
+    font-size: 1rem;
 }
 
 .login-wrapper {
