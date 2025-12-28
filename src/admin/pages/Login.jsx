@@ -32,7 +32,6 @@ export function AdminLogin() {
     <div className="login-wrapper">
       <div className="login-container">
         <div className="login-header text-center mb-4">
-          <img src="/admin/assets/images/header%20footer/logo.png" alt="MQube Logo" className="login-logo mb-3" />
           <h2 className="login-title">Admin Portal</h2>
           <p className="login-subtitle">Sign in to access the dashboard</p>
         </div>
