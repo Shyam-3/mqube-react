@@ -41,7 +41,7 @@ body {
 
 .footer-title {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1rem;
     margin-bottom: 18px;
     color: #ffd700;
     text-transform: capitalize;
@@ -63,7 +63,7 @@ body {
     text-decoration: none;
     transition: color 0.2s ease;
     display: inline-block;
-    font-size: 16px;
+    font-size: 0.875rem;
 }
 
 .footer-links a:hover {
@@ -73,7 +73,7 @@ body {
 .footer-section p {
     margin-bottom: 10px;
     color: #dfe8ff;
-    font-size: 16px;
+    font-size: 0.875rem;
     line-height: 1.6;
 }
 
@@ -81,7 +81,7 @@ body {
 .footer-address p {
     color: #dfe8ff;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 0.875rem;
 }
 
 .footer-contact a,
@@ -122,7 +122,7 @@ body {
 }
 
 .footer-map i {
-    font-size: 56px;
+    font-size: 3.5rem;
     color: #e6f0ff;
 }
 
@@ -148,7 +148,7 @@ body {
 }
 
 .footer-social-links a {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #fff;
     transition: color 0.3s ease;
     display: inline-flex;
@@ -170,7 +170,7 @@ body {
 
 .footer-copyright {
     padding: 12px 0 18px;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: #a0b5d8;
 }
 

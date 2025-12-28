@@ -2,6 +2,7 @@
   font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   font-weight: 400;
+  font-size-adjust: from-font;
   color: #0f172a;
   background-color: #ffffff;
   font-synthesis: none;
