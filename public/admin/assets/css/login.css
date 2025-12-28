@@ -36,14 +36,14 @@
 }
 
 .login-title {
-    font-size: 26px;
+    font-size: 1.625rem;
     font-weight: 600;
     color: #333;
     margin-bottom: 8px;
 }
 
 .login-subtitle {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #666;
     margin-bottom: 0;
 }
@@ -55,13 +55,13 @@
 .form-label {
     font-weight: 500;
     color: #444;
-    font-size: 16px;
+    font-size: 0.875rem;
     margin-bottom: 8px;
 }
 
 .form-control {
     padding: 12px 16px;
-    font-size: 16px;
+    font-size: 0.875rem;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
     transition: all 0.3s ease;
@@ -98,13 +98,13 @@
 }
 
 .form-check-label {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #666;
 }
 
 .login-btn {
     padding: 12px 24px;
-    font-size: 17px;
+    font-size: 1rem;
     font-weight: 500;
     background: #3068B1;
     border: none;
