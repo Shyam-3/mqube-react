@@ -1,4 +1,8 @@
 ;(function(){
+    // Prevent duplicate initialization
+    if (window.__TEACHER_FORM_INITIALIZED__) return
+    window.__TEACHER_FORM_INITIALIZED__ = true
+
     // ================= FORM ELEMENTS =================
     const form = document.getElementById('teacherForm')
     if (!form) return

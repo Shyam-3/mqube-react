@@ -1,4 +1,8 @@
 ;(function(){
+    // Prevent duplicate initialization
+    if (window.__DEMO_FORM_INITIALIZED__) return
+    window.__DEMO_FORM_INITIALIZED__ = true
+
     // ================= ELEMENT REFERENCES =================
     const submitBtn = document.getElementById('submitBtn')
     const resetBtn = document.getElementById('resetBtn')

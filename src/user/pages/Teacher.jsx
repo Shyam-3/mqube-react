@@ -5,13 +5,21 @@ export function Teacher() {
   usePageStyles(['/user/assets/css/teacher.css'])
 
   useEffect(() => {
+    // Check if script already exists to prevent duplicates
+    const existingScript = document.querySelector('script[src="/user/assets/js/teacherForm.js"]')
+    if (existingScript) return
+
     const script = document.createElement('script')
     script.src = '/user/assets/js/teacherForm.js'
     script.defer = true
     document.body.appendChild(script)
 
     return () => {
-      document.body.removeChild(script)
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
+      // Reset initialization flag for next mount
+      window.__TEACHER_FORM_INITIALIZED__ = false
     }
   }, [])
 

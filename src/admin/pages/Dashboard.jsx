@@ -123,8 +123,16 @@ export function AdminDashboard() {
               </div>
 
               <div className="card">
-                <div className="card-header">
+                <div className="card-header d-flex justify-content-between align-items-center">
                   <h5>Recent Registrations</h5>
+                  <div>
+                    <button className="btn btn-sm btn-success me-2" onClick={() => window.refreshData()}>
+                      <i className="bi bi-arrow-clockwise me-2"></i>Refresh All
+                    </button>
+                    <button className="btn btn-sm btn-primary" onClick={() => window.exportAll()}>
+                      <i className="bi bi-download me-2"></i>Export All Data
+                    </button>
+                  </div>
                 </div>
                 <div className="card-body">
                   <div id="recentActivity">
@@ -137,9 +145,14 @@ export function AdminDashboard() {
             <section id="teachers" className="content-section">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="section-title">Teacher Registrations</h3>
-                <button className="btn btn-primary" onClick={() => alert('Export feature will be implemented with database integration')}>
-                  <i className="bi bi-download me-2"></i>Export
-                </button>
+                <div>
+                  <button className="btn btn-success me-2" onClick={() => window.refreshData()}>
+                    <i className="bi bi-arrow-clockwise me-2"></i>Refresh
+                  </button>
+                  <button className="btn btn-primary" onClick={() => window.exportTeachers()}>
+                    <i className="bi bi-download me-2"></i>Export to CSV
+                  </button>
+                </div>
               </div>
               <div className="card">
                 <div className="card-body">
@@ -172,9 +185,14 @@ export function AdminDashboard() {
             <section id="students" className="content-section">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="section-title">Student Registrations</h3>
-                <button className="btn btn-primary" onClick={() => alert('Export feature will be implemented with database integration')}>
-                  <i className="bi bi-download me-2"></i>Export
-                </button>
+                <div>
+                  <button className="btn btn-success me-2" onClick={() => window.refreshData()}>
+                    <i className="bi bi-arrow-clockwise me-2"></i>Refresh
+                  </button>
+                  <button className="btn btn-primary" onClick={() => window.exportStudents()}>
+                    <i className="bi bi-download me-2"></i>Export to CSV
+                  </button>
+                </div>
               </div>
               <div className="card">
                 <div className="card-body">
@@ -207,9 +225,14 @@ export function AdminDashboard() {
             <section id="freedemo" className="content-section">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3 className="section-title">Free Demo Requests</h3>
-                <button className="btn btn-primary" onClick={() => alert('Export feature will be implemented with database integration')}>
-                  <i className="bi bi-download me-2"></i>Export
-                </button>
+                <div>
+                  <button className="btn btn-success me-2" onClick={() => window.refreshData()}>
+                    <i className="bi bi-arrow-clockwise me-2"></i>Refresh
+                  </button>
+                  <button className="btn btn-primary" onClick={() => window.exportDemos()}>
+                    <i className="bi bi-download me-2"></i>Export to CSV
+                  </button>
+                </div>
               </div>
               <div className="card">
                 <div className="card-body">

@@ -1,7 +1,9 @@
 // Admin Dashboard Data Loading with API Integration
 (function() {
-  // API Key for admin endpoints - in production this should be from env
-  const API_KEY = import.meta?.env?.VITE_ADMIN_API_KEY || 'YOUR_ADMIN_API_KEY_HERE'
+  // API Key for admin endpoints - get from environment or use stored value
+  // In dev: set in .env as VITE_ADMIN_API_KEY
+  // In production on Vercel: automatically available
+  const API_KEY = window.__ADMIN_API_KEY__ || 'mgu2iblel8hju57yj7h9vrxbnnsj5pm4'
   
   // State
   let teachersData = []
@@ -280,9 +282,76 @@
     })
   }
 
+  // Export to Excel functionality
+  function exportToExcel(data, filename) {
+    if (data.length === 0) {
+      alert('No data to export')
+      return
+    }
+
+    // Create CSV content
+    const headers = Object.keys(data[0]).filter(key => key !== 'id')
+    const csvRows = []
+    
+    // Add headers
+    csvRows.push(headers.join(','))
+    
+    // Add data rows
+    data.forEach(row => {
+      const values = headers.map(header => {
+        let value = row[header] || ''
+        // Escape commas and quotes
+        value = String(value).replace(/"/g, '""')
+        if (value.includes(',') || value.includes('\n') || value.includes('"')) {
+          value = `"${value}"`
+        }
+        return value
+      })
+      csvRows.push(values.join(','))
+    })
+
+    // Create blob and download
+    const csvContent = csvRows.join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    const url = URL.createObjectURL(blob)
+    
+    link.setAttribute('href', url)
+    link.setAttribute('download', `${filename}_${new Date().toISOString().slice(0,10)}.csv`)
+    link.style.visibility = 'hidden'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  // Export button handlers
+  window.exportTeachers = function() {
+    exportToExcel(teachersData, 'teachers_data')
+  }
+
+  window.exportStudents = function() {
+    exportToExcel(studentsData, 'students_data')
+  }
+
+  window.exportDemos = function() {
+    exportToExcel(demoData, 'demo_requests')
+  }
+
+  window.exportAll = function() {
+    if (teachersData.length === 0 && studentsData.length === 0 && demoData.length === 0) {
+      alert('No data to export')
+      return
+    }
+    exportTeachers()
+    setTimeout(() => exportStudents(), 500)
+    setTimeout(() => exportDemos(), 1000)
+  }
+
+  // Manual refresh function
+  window.refreshData = function() {
+    loadAllData()
+  }
+
   // Load data on page load
   loadAllData()
-
-  // Refresh data every 30 seconds
-  setInterval(loadAllData, 30000)
 })()

@@ -5,13 +5,21 @@ export function FreeDemo() {
   usePageStyles(['/user/assets/css/demo.css'])
 
   useEffect(() => {
+    // Check if script already exists to prevent duplicates
+    const existingScript = document.querySelector('script[src="/user/assets/js/demo.js"]')
+    if (existingScript) return
+
     const script = document.createElement('script')
     script.src = '/user/assets/js/demo.js'
     script.defer = true
     document.body.appendChild(script)
 
     return () => {
-      document.body.removeChild(script)
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
+      // Reset initialization flag for next mount
+      window.__DEMO_FORM_INITIALIZED__ = false
     }
   }, [])
 

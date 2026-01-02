@@ -1,4 +1,8 @@
 ;(function(){
+    // Prevent duplicate initialization
+    if (window.__STUDENT_FORM_INITIALIZED__) return
+    window.__STUDENT_FORM_INITIALIZED__ = true
+
     // ================= ELEMENT REFERENCES =================
     const form = document.getElementById('studentForm')
     if (!form) return
