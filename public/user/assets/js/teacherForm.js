@@ -117,7 +117,7 @@
 
     // ================= SUBMIT =================
     if (submitBtn) {
-        submitBtn.addEventListener('click', () => {
+        submitBtn.addEventListener('click', async () => {
             // 1️⃣ HTML required fields
             if (!form.checkValidity()) {
                 form.reportValidity()
@@ -159,8 +159,42 @@
                 return
             }
 
-            // ✅ SUCCESS
-            successOverlay.style.display = 'flex'
+            // ✅ COLLECT FORM DATA
+            const formData = {
+                fullName: form.querySelector('input[type="text"]').value,
+                qualification: form.querySelector('select').value,
+                subjects: form.querySelectorAll('select')[1].value,
+                experience: form.querySelectorAll('select')[2].value + ' years ' + form.querySelectorAll('select')[3].value + ' months',
+                email: emailId.value,
+                phone: contactNo.value
+            }
+
+            // Disable button during submission
+            submitBtn.disabled = true
+            submitBtn.textContent = 'Submitting...'
+
+            try {
+                const response = await fetch('/api/teacher', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+
+                const result = await response.json()
+
+                if (response.ok) {
+                    // Show success popup
+                    successOverlay.style.display = 'flex'
+                } else {
+                    alert('Error submitting form: ' + (result.error || 'Unknown error'))
+                }
+            } catch (error) {
+                console.error('Submission error:', error)
+                alert('Network error. Please try again.')
+            } finally {
+                submitBtn.disabled = false
+                submitBtn.textContent = 'Submit'
+            }
         })
     }
 

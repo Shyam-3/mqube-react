@@ -102,7 +102,7 @@
     })
 
     // ================= SUBMIT LOGIC =================
-    submitBtn.addEventListener('click', () => {
+    submitBtn.addEventListener('click', async () => {
         let valid = true
 
         // REQUIRED FIELD CHECK
@@ -148,9 +148,42 @@
         // ❌ STOP IF INVALID
         if (!valid) return
 
-        // ✅ SUCCESS
-        overlay.style.display = 'block'
-        submitPopup.style.display = 'block'
+        // ✅ COLLECT FORM DATA
+        const formData = {
+            name: fullname.value,
+            email: email.value,
+            phone: contact.value,
+            preferred_time: address.value, // Using address field for preferred time
+            message: `I am: ${iam.value}, Gender: ${gender.value}, Board: ${board.value}, Grade: ${grade.value}`
+        }
+
+        // Disable button during submission
+        submitBtn.disabled = true
+        submitBtn.textContent = 'Submitting...'
+
+        try {
+            const response = await fetch('/api/free-demo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+
+            const result = await response.json()
+
+            if (response.ok) {
+                // Show success popup
+                overlay.style.display = 'block'
+                submitPopup.style.display = 'block'
+            } else {
+                alert('Error submitting form: ' + (result.error || 'Unknown error'))
+            }
+        } catch (error) {
+            console.error('Submission error:', error)
+            alert('Network error. Please try again.')
+        } finally {
+            submitBtn.disabled = false
+            submitBtn.textContent = 'Submit'
+        }
     })
 
     // ================= SUBMIT OK =================

@@ -89,15 +89,50 @@
 
     // ---------- SUBMIT LOGIC ----------
     if (submitBtn && successOverlay && successOk) {
-        submitBtn.addEventListener('click', () => {
+        submitBtn.addEventListener('click', async () => {
             // 🔴 Check if all required fields are filled
             if (!form.checkValidity()) {
                 form.reportValidity() // shows browser validation messages
                 return
             }
 
-            // ✅ If all fields are filled
-            successOverlay.style.display = 'flex'
+            // ✅ COLLECT FORM DATA
+            const formInputs = form.querySelectorAll('input, select')
+            const formData = {
+                studentName: formInputs[0].value,
+                parentName: formInputs[2].value,
+                grade: formInputs[4].value,
+                subject: formInputs[3].value,
+                email: emailId.value,
+                phone: contactNo.value
+            }
+
+            // Disable button during submission
+            submitBtn.disabled = true
+            submitBtn.textContent = 'Submitting...'
+
+            try {
+                const response = await fetch('/api/student', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+
+                const result = await response.json()
+
+                if (response.ok) {
+                    // Show success popup
+                    successOverlay.style.display = 'flex'
+                } else {
+                    alert('Error submitting form: ' + (result.error || 'Unknown error'))
+                }
+            } catch (error) {
+                console.error('Submission error:', error)
+                alert('Network error. Please try again.')
+            } finally {
+                submitBtn.disabled = false
+                submitBtn.textContent = 'Submit'
+            }
         })
 
         successOk.addEventListener('click', () => {
